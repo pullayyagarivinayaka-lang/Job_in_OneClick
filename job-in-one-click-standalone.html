@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job in One Click — Find the right job. Near you. Apply in one click.</title>
+<meta name="description" content="A modern job-search platform for students, freshers and professionals. Build your profile once, discover jobs near you, and apply in one click.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Job in One Click — Stylesheet
+   Type: Space Grotesk (display) + Inter (body)
+   Palette: royal blue on white, deep navy dark mode
+   ============================================================ */
+
+:root {
+  --bg: #F6F8FC;
+  --surface: #FFFFFF;
+  --surface-2: #EEF2FA;
+  --text: #101828;
+  --text-muted: #5B6B82;
+  --border: #E1E7F0;
+  --primary: #1D4ED8;
+  --primary-dark: #15359E;
+  --primary-tint: #E8EEFE;
+  --accent: #0891B2;
+  --success: #15803D;
+  --success-tint: #E7F6EC;
+  --warning: #B45309;
+  --warning-tint: #FDF2E3;
+  --danger: #B91C1C;
+  --danger-tint: #FCEAEA;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgba(16,24,40,.06);
+  --shadow-md: 0 6px 20px rgba(16,24,40,.08);
+  --header-h: 64px;
+  --maxw: 1180px;
+}
+
+html.dark {
+  --bg: #0A1220;
+  --surface: #101A2C;
+  --surface-2: #16233A;
+  --text: #E8EDF7;
+  --text-muted: #90A0BC;
+  --border: #223050;
+  --primary: #4C7CF0;
+  --primary-dark: #A9C2FA;
+  --primary-tint: #16233F;
+  --accent: #38BDF8;
+  --success: #4ADE80;
+  --success-tint: #10301F;
+  --warning: #FBBF62;
+  --warning-tint: #33230D;
+  --danger: #F87171;
+  --danger-tint: #341414;
+  --shadow: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 10px 28px rgba(0,0,0,.45);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s ease, color .2s ease;
+}
+h1, h2, h3, h4, .display {
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 .4em;
+  color: var(--text);
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+img { max-width: 100%; display: block; }
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border-radius: var(--radius-md); border: 1px solid transparent;
+  padding: 10px 18px; font-size: 14px; font-weight: 600; line-height: 1;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 10px; }
+.btn-ghost:hover { color: var(--primary); }
+.btn-sm { padding: 7px 12px; font-size: 13px; }
+.btn-block { width: 100%; }
+.btn-danger { background: var(--danger-tint); color: var(--danger); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.icon-btn {
+  width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: var(--text-muted);
+}
+.icon-btn:hover { color: var(--primary); border-color: var(--primary); }
+.icon-btn.active { color: var(--primary); border-color: var(--primary); background: var(--primary-tint); }
+
+/* ---------- Header ---------- */
+.app-header {
+  position: sticky; top: 0; z-index: 40; height: var(--header-h);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.app-header .container { height: 100%; display: flex; align-items: center; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: "Space Grotesk"; font-weight: 700; font-size: 19px; flex-shrink: 0; }
+.brand-mark {
+  width: 34px; height: 34px; border-radius: 9px; background: var(--primary);
+  color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;
+}
+.main-nav { display: none; gap: 4px; margin-left: 10px; }
+.main-nav a {
+  padding: 8px 12px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--text-muted);
+}
+.main-nav a:hover { color: var(--text); background: var(--surface-2); }
+.main-nav a.active { color: var(--primary); background: var(--primary-tint); }
+.header-spacer { flex: 1; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.location-chip {
+  display: none; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted);
+  border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; background: var(--surface);
+  max-width: 190px;
+}
+.location-chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--primary-tint); color: var(--primary);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; border: 1px solid var(--border);
+}
+@media (min-width: 900px) {
+  .main-nav { display: flex; }
+  .location-chip { display: inline-flex; }
+}
+.mobile-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--surface);
+  border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+}
+@media (min-width: 900px) { .mobile-nav { display: none; } }
+.mobile-nav a { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: var(--text-muted); padding: 6px 8px; border-radius: 8px; flex: 1; text-align: center; }
+.mobile-nav a.active { color: var(--primary); }
+body { padding-bottom: 64px; }
+@media (min-width: 900px) { body { padding-bottom: 0; } }
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(180deg, var(--primary-tint) 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 0 44px;
+}
+.hero .container { display: grid; gap: 34px; }
+@media (min-width: 960px) { .hero .container { grid-template-columns: 1.1fr .9fr; align-items: center; } }
+.hero-eyebrow { color: var(--primary); font-weight: 600; font-size: 13px; margin-bottom: 10px; }
+.hero h1 { font-size: 34px; line-height: 1.15; max-width: 15ch; }
+@media (min-width: 640px) { .hero h1 { font-size: 44px; } }
+.hero p.lead { color: var(--text-muted); font-size: 16px; max-width: 46ch; margin: 14px 0 26px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-search {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 14px; box-shadow: var(--shadow-md); display: grid; gap: 10px; margin-top: 28px;
+}
+.hero-search .row { display: grid; gap: 10px; }
+@media (min-width: 560px) { .hero-search .row { grid-template-columns: 1.3fr 1fr auto; } }
+.hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 30px; }
+.hero-stat b { font-family: "Space Grotesk"; font-size: 24px; display: block; }
+.hero-stat span { color: var(--text-muted); font-size: 12.5px; }
+.hero-visual {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 22px; box-shadow: var(--shadow-md);
+}
+.hero-visual .mock-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; border-left: 3px solid var(--primary); }
+.hero-visual .mock-card:last-child { margin-bottom: 0; }
+.hero-visual .mock-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.match-pill { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--success-tint); color: var(--success); }
+
+/* ---------- Sections / generic ---------- */
+.page { padding: 26px 0 60px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.section-head h2 { font-size: 20px; }
+.muted { color: var(--text-muted); }
+.grid { display: grid; gap: 16px; }
+.cols-3 { grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px;
+}
+.stat-card .num { font-family: "Space Grotesk"; font-size: 26px; font-weight: 700; }
+.stat-card .lbl { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+.card-pad { padding: 18px; }
+
+.category-chip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 10px; }
+.category-chip {
+  border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; background: var(--surface);
+  font-size: 13.5px; font-weight: 600; transition: border-color .15s;
+}
+.category-chip:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---------- Steps ---------- */
+.steps { display: grid; gap: 16px; }
+@media (min-width: 800px) { .steps { grid-template-columns: repeat(4,1fr); } }
+.step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; }
+.step .n { color: var(--primary); font-family: "Space Grotesk"; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+
+/* ---------- Jobs layout ---------- */
+.jobs-layout { display: grid; gap: 20px; }
+@media (min-width: 960px) { .jobs-layout { grid-template-columns: 280px 1fr; align-items: start; } }
+.filters-panel {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px;
+  position: sticky; top: calc(var(--header-h) + 14px);
+  max-height: calc(100vh - var(--header-h) - 28px); overflow-y: auto;
+}
+.filter-group { border-bottom: 1px solid var(--border); padding: 14px 0; }
+.filter-group:first-child { padding-top: 0; }
+.filter-group:last-child { border-bottom: none; }
+.filter-group h4 { font-size: 13px; text-transform: none; margin-bottom: 10px; }
+.filter-opt { display: flex; align-items: center; gap: 8px; font-size: 13.5px; padding: 4px 0; color: var(--text); }
+.filter-opt input { accent-color: var(--primary); width: 15px; height: 15px; }
+.range-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.input, select.input {
+  width: 100%; padding: 9px 11px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.search-row { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.search-row .input { flex: 1; min-width: 180px; }
+.toolbar { display: flex; align-items: center; gap: 10px; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; }
+.toolbar-right { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- Job card ---------- */
+.job-card {
+  background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--primary);
+  border-radius: var(--radius-md); padding: 16px; display: grid; gap: 10px;
+}
+.job-card-top { display: flex; gap: 12px; }
+.job-logo {
+  width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--primary-tint); color: var(--primary);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.job-title-wrap { flex: 1; min-width: 0; }
+.job-title-wrap h3 { font-size: 16px; margin-bottom: 2px; }
+.job-title-wrap .company { color: var(--text-muted); font-size: 13.5px; }
+.match-badge {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; height: fit-content;
+}
+.match-high { background: var(--success-tint); color: var(--success); }
+.match-mid { background: var(--warning-tint); color: var(--warning); }
+.match-low { background: var(--surface-2); color: var(--text-muted); }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--text-muted); }
+.meta-row .meta-item { display: flex; align-items: center; gap: 5px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--surface-2); color: var(--text-muted);
+}
+.tag.blue { background: var(--primary-tint); color: var(--primary); }
+.job-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+.deadline-note { font-size: 12px; color: var(--warning); }
+.card-actions { display: flex; gap: 8px; }
+
+/* ---------- Job details ---------- */
+.detail-grid { display: grid; gap: 20px; }
+@media (min-width: 960px) { .detail-grid { grid-template-columns: 1fr 320px; align-items: start; } }
+.detail-header { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.detail-header .job-logo { width: 56px; height: 56px; font-size: 18px; }
+.spec-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 14px; margin: 18px 0; }
+.spec-item .k { font-size: 12px; color: var(--text-muted); }
+.spec-item .v { font-weight: 600; font-size: 14px; margin-top: 2px; }
+.match-breakdown-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+.bar-track { flex: 1; height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.bar-fill { height: 100%; background: var(--primary); border-radius: 99px; }
+
+/* ---------- Forms ---------- */
+.form-grid { display: grid; gap: 14px; }
+@media (min-width: 640px) { .form-grid.two { grid-template-columns: 1fr 1fr; } }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.field .hint { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+.tag-input { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }
+.tag-input input { border: none; outline: none; background: transparent; flex: 1; min-width: 100px; font-size: 13px; color: var(--text); }
+.tag-remove { background: var(--surface-2); border-radius: 999px; padding: 3px 8px; font-size: 12px; display: inline-flex; align-items: center; gap: 5px; }
+.tag-remove button { border: none; background: none; color: var(--text-muted); font-size: 13px; line-height: 1; }
+.upload-box {
+  border: 1.5px dashed var(--border); border-radius: var(--radius-md); padding: 22px; text-align: center; color: var(--text-muted);
+  background: var(--surface-2);
+}
+.upload-box.has-file { border-style: solid; border-color: var(--primary); color: var(--text); background: var(--primary-tint); }
+.progress-track { height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--primary); }
+
+/* ---------- Auth ---------- */
+.auth-wrap { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - var(--header-h) - 100px); padding: 30px 16px; }
+.auth-card { width: 100%; max-width: 400px; }
+.auth-tabs { display: flex; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 20px; }
+.auth-tabs button { flex: 1; padding: 10px; background: var(--surface); color: var(--text-muted); font-weight: 600; font-size: 13.5px; border: none; }
+.auth-tabs button.active { background: var(--primary); color: #fff; }
+
+/* ---------- Table (applications) ---------- */
+.app-list { display: grid; gap: 12px; }
+.app-row {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px;
+  display: grid; gap: 10px; grid-template-columns: 1fr; align-items: center;
+}
+@media (min-width: 760px) { .app-row { grid-template-columns: 2.2fr 1fr 1fr 1fr auto; } }
+.status-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; white-space: nowrap; width: fit-content; }
+.status-submitted { background: var(--success-tint); color: var(--success); }
+.status-redirected { background: var(--warning-tint); color: var(--warning); }
+.status-review { background: var(--primary-tint); color: var(--primary); }
+.status-interview { background: #EDE4FF; color: #6D28D9; }
+.status-rejected { background: var(--danger-tint); color: var(--danger); }
+.status-selected { background: var(--success-tint); color: var(--success); }
+html.dark .status-interview { background: #241a3d; color: #C4B5FD; }
+
+/* ---------- Toast / modal ---------- */
+.toast-wrap { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); z-index: 100; display: grid; gap: 8px; width: min(92vw, 380px); }
+@media (min-width: 900px) { .toast-wrap { bottom: 24px; } }
+.toast {
+  background: var(--text); color: var(--bg); padding: 12px 16px; border-radius: var(--radius-md); font-size: 13.5px; box-shadow: var(--shadow-md);
+  display: flex; align-items: center; gap: 10px; animation: toastin .18s ease;
+}
+@keyframes toastin { from { opacity:0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(10,14,25,.55); z-index: 90; display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.modal-box {
+  background: var(--surface); border-radius: var(--radius-lg); padding: 24px; max-width: 460px; width: 100%; box-shadow: var(--shadow-md);
+  max-height: 88vh; overflow-y: auto;
+}
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+/* ---------- Empty state ---------- */
+.empty-state { text-align: center; padding: 50px 20px; color: var(--text-muted); }
+.empty-state .glyph { font-size: 34px; margin-bottom: 10px; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border); padding: 30px 20px; text-align: center; color: var(--text-muted); font-size: 13.5px;
+}
+.site-footer .credit { font-weight: 600; color: var(--text); }
+.site-footer .credit .heart { color: #E11D48; }
+
+/* ---------- Utility ---------- */
+.flex { display: flex; }
+.gap-8 { gap: 8px; } .gap-12 { gap: 12px; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.mt-8 { margin-top: 8px; } .mt-16 { margin-top: 16px; } .mt-24 { margin-top: 24px; }
+.w-full { width: 100%; }
+.text-center { text-align: center; }
+.small { font-size: 12.5px; }
+.hidden { display: none !important; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="container">
+    <a href="#/home" class="brand"><span class="brand-mark">JC</span> Job in One Click</a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary"></nav>
+    <div class="header-spacer"></div>
+    <div class="header-actions">
+      <span class="location-chip" id="locationChip"></span>
+      <button class="icon-btn" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+      <span id="headerAuthArea" class="flex gap-8 items-center"></span>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile"></nav>
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<footer class="site-footer">
+  <div>© 2026 Job in One Click — demo project with illustrative sample data.</div>
+  <div class="mt-8">Made with <span class="heart">❤️</span> by <span class="credit">Pullayyagari Vinayaka</span></div>
+</footer>
+
+<script>
+/* ============================================================
+   Job in One Click — Sample Data
+   All data below is illustrative/demo data, not live listings.
+   ============================================================ */
+
+const CITIES = [
+  { name: "Hyderabad", lat: 17.3850, lng: 78.4867 },
+  { name: "Bengaluru", lat: 12.9716, lng: 77.5946 },
+  { name: "Mumbai", lat: 19.0760, lng: 72.8777 },
+  { name: "Pune", lat: 18.5204, lng: 73.8567 },
+  { name: "Delhi NCR", lat: 28.6139, lng: 77.2090 },
+  { name: "Chennai", lat: 13.0827, lng: 80.2707 },
+  { name: "Kolkata", lat: 22.5726, lng: 88.3639 },
+  { name: "Ahmedabad", lat: 23.0225, lng: 72.5714 },
+  { name: "Kochi", lat: 9.9312, lng: 76.2673 },
+  { name: "Chandigarh", lat: 30.7333, lng: 76.7794 },
+  { name: "Remote / Anywhere", lat: null, lng: null }
+];
+
+const CATEGORIES = [
+  "Internships", "Fresher", "Undergraduate", "Graduate", "Part-time",
+  "Full-time", "Remote", "IT/Software", "Data Science", "Analytics",
+  "Finance", "Marketing", "Design", "Customer Support", "Government Jobs"
+];
+
+const EDUCATION_LEVELS = ["Any", "12th Pass", "Diploma", "Undergraduate", "Postgraduate", "Doctorate"];
+
+const JOB_TYPES = ["Full-time", "Part-time", "Internship", "Contract"];
+const WORK_MODES = ["Remote", "On-site", "Hybrid"];
+
+function daysAgo(n) {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return d.toISOString().slice(0, 10);
+}
+function daysFromNow(n) {
+  const d = new Date();
+  d.setDate(d.getDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+/* applyType: 'internal' -> One-Click Apply submits within the app using saved profile
+   applyType: 'external' -> redirects to the official company/govt portal (no auto-submit claim) */
+
+const JOBS = [
+  {
+    id: "j1", title: "Software Engineer Intern", company: "Zenwave Technologies",
+    city: "Hyderabad", categories: ["Internships", "IT/Software", "Undergraduate"],
+    jobType: "Internship", workMode: "Hybrid", salaryMin: 15000, salaryMax: 25000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["JavaScript", "React", "Git", "Problem Solving"],
+    posted: daysAgo(2), deadline: daysFromNow(20),
+    description: "Work with our product engineering team building customer-facing web features. Great for students in their pre-final or final year looking for hands-on experience with modern web stacks.",
+    eligibility: "Open to students from any college, anywhere in the country.",
+    applyType: "internal", logo: "ZW"
+  },
+  {
+    id: "j2", title: "Graduate Trainee — Data Analytics", company: "Nimbus Analytics",
+    city: "Bengaluru", categories: ["Fresher", "Graduate", "Data Science", "Analytics"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 450000, salaryMax: 600000, salaryUnit: "year",
+    expMin: 0, expMax: 1, education: "Undergraduate",
+    skills: ["SQL", "Python", "Excel", "Statistics"],
+    posted: daysAgo(1), deadline: daysFromNow(25),
+    description: "A structured 6-month training program for fresh graduates, followed by a full-time analyst role. You'll learn dashboarding, data pipelines and stakeholder reporting.",
+    eligibility: "Open to 2025/2026 graduates from any city in India.",
+    applyType: "internal", logo: "NA"
+  },
+  {
+    id: "j3", title: "Frontend Developer", company: "Flipmart Commerce",
+    city: "Mumbai", categories: ["IT/Software", "Full-time", "Graduate"],
+    jobType: "Full-time", workMode: "Hybrid", salaryMin: 800000, salaryMax: 1400000, salaryUnit: "year",
+    expMin: 1, expMax: 3, education: "Undergraduate",
+    skills: ["React", "TypeScript", "CSS", "REST APIs"],
+    posted: daysAgo(4), deadline: daysFromNow(15),
+    description: "Build and ship consumer-facing shopping experiences used by millions. You'll partner closely with design and backend teams.",
+    eligibility: "Open nationwide; relocation assistance available.",
+    applyType: "external", applyUrl: "https://www.linkedin.com/jobs/", logo: "FM"
+  },
+  {
+    id: "j4", title: "Part-time Content Writer", company: "InkWell Media",
+    city: "Remote / Anywhere", categories: ["Part-time", "Remote", "Marketing", "Undergraduate"],
+    jobType: "Part-time", workMode: "Remote", salaryMin: 8000, salaryMax: 15000, salaryUnit: "month",
+    expMin: 0, expMax: 1, education: "12th Pass",
+    skills: ["Writing", "SEO Basics", "Research"],
+    posted: daysAgo(3), deadline: daysFromNow(10),
+    description: "Write blog posts and product copy for a fast-growing D2C brand. Flexible hours, fully remote — great alongside college.",
+    eligibility: "Applicants can apply from anywhere; fully remote role.",
+    applyType: "internal", logo: "IW"
+  },
+  {
+    id: "j5", title: "Junior Financial Analyst", company: "Suvidha Capital",
+    city: "Delhi NCR", categories: ["Finance", "Fresher", "Graduate"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 500000, salaryMax: 700000, salaryUnit: "year",
+    expMin: 0, expMax: 2, education: "Postgraduate",
+    skills: ["Financial Modelling", "Excel", "Valuation"],
+    posted: daysAgo(6), deadline: daysFromNow(12),
+    description: "Support the investment research team with company financials, sector notes and valuation models.",
+    eligibility: "MBA/M.Com/CA-Inter candidates from any institute.",
+    applyType: "external", applyUrl: "https://www.naukri.com/", logo: "SC"
+  },
+  {
+    id: "j6", title: "UI/UX Design Intern", company: "Studio Aster",
+    city: "Pune", categories: ["Internships", "Design", "Undergraduate"],
+    jobType: "Internship", workMode: "Hybrid", salaryMin: 10000, salaryMax: 18000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Figma", "Wireframing", "User Research"],
+    posted: daysAgo(5), deadline: daysFromNow(18),
+    description: "Assist senior designers on mobile app redesigns for fintech clients. Portfolio review required.",
+    eligibility: "Design/HCI/any-discipline students, any city.",
+    applyType: "internal", logo: "SA"
+  },
+  {
+    id: "j7", title: "Customer Support Associate", company: "HelpDesk360",
+    city: "Chennai", categories: ["Customer Support", "Fresher", "Full-time"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 220000, salaryMax: 320000, salaryUnit: "year",
+    expMin: 0, expMax: 1, education: "12th Pass",
+    skills: ["Communication", "Ticketing Tools", "Patience"],
+    posted: daysAgo(2), deadline: daysFromNow(22),
+    description: "Handle inbound customer queries via chat and voice for an e-commerce platform. Training provided.",
+    eligibility: "12th pass or above, from any state.",
+    applyType: "internal", logo: "HD"
+  },
+  {
+    id: "j8", title: "Data Scientist II", company: "Vector Intelligence",
+    city: "Bengaluru", categories: ["Data Science", "Analytics", "IT/Software", "Full-time"],
+    jobType: "Full-time", workMode: "Remote", salaryMin: 1600000, salaryMax: 2400000, salaryUnit: "year",
+    expMin: 3, expMax: 6, education: "Postgraduate",
+    skills: ["Python", "Machine Learning", "MLOps", "SQL"],
+    posted: daysAgo(1), deadline: daysFromNow(30),
+    description: "Own the lifecycle of ML models used in fraud detection — from experimentation to production monitoring.",
+    eligibility: "Fully remote, open to candidates anywhere in India.",
+    applyType: "external", applyUrl: "https://www.linkedin.com/jobs/", logo: "VI"
+  },
+  {
+    id: "j9", title: "SSC CGL — Tax Assistant", company: "Govt. of India — SSC",
+    city: "Delhi NCR", categories: ["Government Jobs", "Graduate", "Fresher"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 350000, salaryMax: 450000, salaryUnit: "year",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["General Awareness", "Quantitative Aptitude", "Reasoning"],
+    posted: daysAgo(10), deadline: daysFromNow(35),
+    description: "Recruitment for Tax Assistant posts under the Combined Graduate Level exam. Includes tier I/II exams and document verification.",
+    eligibility: "Indian citizens, graduates, age limit as per SSC norms — apply from anywhere.",
+    applyType: "external", applyUrl: "https://ssc.nic.in/", logo: "GI"
+  },
+  {
+    id: "j10", title: "Digital Marketing Executive", company: "Brandloom",
+    city: "Ahmedabad", categories: ["Marketing", "Fresher", "Full-time"],
+    jobType: "Full-time", workMode: "Hybrid", salaryMin: 300000, salaryMax: 450000, salaryUnit: "year",
+    expMin: 0, expMax: 2, education: "Undergraduate",
+    skills: ["SEO", "Google Ads", "Social Media", "Analytics"],
+    posted: daysAgo(3), deadline: daysFromNow(14),
+    description: "Plan and run performance campaigns for D2C clients across search and social platforms.",
+    eligibility: "Any graduate, from any city.",
+    applyType: "internal", logo: "BL"
+  },
+  {
+    id: "j11", title: "Backend Engineer (Node.js)", company: "Coreloop Systems",
+    city: "Hyderabad", categories: ["IT/Software", "Full-time", "Graduate"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 900000, salaryMax: 1600000, salaryUnit: "year",
+    expMin: 2, expMax: 5, education: "Undergraduate",
+    skills: ["Node.js", "PostgreSQL", "Docker", "System Design"],
+    posted: daysAgo(7), deadline: daysFromNow(9),
+    description: "Design and scale backend services powering our logistics platform used across 200+ cities.",
+    eligibility: "Open nationwide; on-site role with relocation support.",
+    applyType: "external", applyUrl: "https://www.indeed.com/", logo: "CL"
+  },
+  {
+    id: "j12", title: "Business Analyst Intern", company: "MetricEdge Consulting",
+    city: "Mumbai", categories: ["Internships", "Analytics", "Undergraduate", "Finance"],
+    jobType: "Internship", workMode: "Remote", salaryMin: 12000, salaryMax: 20000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Excel", "PowerPoint", "Analytical Thinking"],
+    posted: daysAgo(2), deadline: daysFromNow(16),
+    description: "Support consulting engagements with data gathering, market research and client-ready decks.",
+    eligibility: "Remote internship, open to students anywhere.",
+    applyType: "internal", logo: "ME"
+  },
+  {
+    id: "j13", title: "Graphic Designer", company: "Studio Aster",
+    city: "Pune", categories: ["Design", "Full-time", "Fresher"],
+    jobType: "Full-time", workMode: "Hybrid", salaryMin: 350000, salaryMax: 550000, salaryUnit: "year",
+    expMin: 0, expMax: 2, education: "Undergraduate",
+    skills: ["Illustrator", "Photoshop", "Branding"],
+    posted: daysAgo(9), deadline: daysFromNow(6),
+    description: "Create brand assets, packaging and social creatives for a growing portfolio of consumer brands.",
+    eligibility: "Any design background, any city — portfolio required.",
+    applyType: "internal", logo: "SA"
+  },
+  {
+    id: "j14", title: "Part-time Data Entry Operator", company: "RecordKeep Pvt Ltd",
+    city: "Kolkata", categories: ["Part-time", "Undergraduate", "Fresher"],
+    jobType: "Part-time", workMode: "Remote", salaryMin: 6000, salaryMax: 10000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "12th Pass",
+    skills: ["Typing Speed", "MS Excel", "Attention to Detail"],
+    posted: daysAgo(1), deadline: daysFromNow(25),
+    description: "Digitize and validate scanned records for a document management client. Flexible hours.",
+    eligibility: "Fully remote — apply from anywhere in India.",
+    applyType: "internal", logo: "RK"
+  },
+  {
+    id: "j15", title: "Machine Learning Intern", company: "Vector Intelligence",
+    city: "Bengaluru", categories: ["Internships", "Data Science", "IT/Software"],
+    jobType: "Internship", workMode: "Remote", salaryMin: 20000, salaryMax: 30000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Python", "NumPy", "Pandas", "ML Basics"],
+    posted: daysAgo(4), deadline: daysFromNow(20),
+    description: "Contribute to model experimentation notebooks and help build evaluation pipelines under mentorship.",
+    eligibility: "Final-year students, remote — apply from anywhere.",
+    applyType: "internal", logo: "VI"
+  },
+  {
+    id: "j16", title: "Bank PO (Probationary Officer)", company: "Govt. Sector Bank",
+    city: "Chandigarh", categories: ["Government Jobs", "Graduate", "Fresher", "Finance"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 480000, salaryMax: 600000, salaryUnit: "year",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Reasoning", "Quantitative Aptitude", "Banking Awareness"],
+    posted: daysAgo(12), deadline: daysFromNow(40),
+    description: "IBPS-pattern recruitment for Probationary Officers across public sector bank branches nationwide.",
+    eligibility: "Any graduate, age 20–30, apply from anywhere in India.",
+    applyType: "external", applyUrl: "https://www.ibps.in/", logo: "GB"
+  },
+  {
+    id: "j17", title: "SEO & Content Intern", company: "InkWell Media",
+    city: "Remote / Anywhere", categories: ["Internships", "Marketing", "Remote", "Undergraduate"],
+    jobType: "Internship", workMode: "Remote", salaryMin: 8000, salaryMax: 12000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "12th Pass",
+    skills: ["SEO Basics", "Content Writing", "Keyword Research"],
+    posted: daysAgo(3), deadline: daysFromNow(21),
+    description: "Research keywords, optimize existing articles, and assist with editorial calendars.",
+    eligibility: "Remote — open to students and freshers from anywhere.",
+    applyType: "internal", logo: "IW"
+  },
+  {
+    id: "j18", title: "Full Stack Developer", company: "Coreloop Systems",
+    city: "Hyderabad", categories: ["IT/Software", "Full-time", "Graduate"],
+    jobType: "Full-time", workMode: "Hybrid", salaryMin: 1000000, salaryMax: 1800000, salaryUnit: "year",
+    expMin: 2, expMax: 6, education: "Undergraduate",
+    skills: ["React", "Node.js", "MongoDB", "AWS"],
+    posted: daysAgo(0), deadline: daysFromNow(28),
+    description: "Own features end-to-end across our web app, from database schema to polished UI.",
+    eligibility: "Open nationwide, hybrid role with 2 office days/week.",
+    applyType: "internal", logo: "CL"
+  },
+  {
+    id: "j19", title: "HR & Recruitment Intern", company: "Nimbus Analytics",
+    city: "Bengaluru", categories: ["Internships", "Undergraduate"],
+    jobType: "Internship", workMode: "On-site", salaryMin: 10000, salaryMax: 15000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Communication", "Screening", "MS Office"],
+    posted: daysAgo(6), deadline: daysFromNow(11),
+    description: "Support campus hiring drives, resume screening and interview scheduling.",
+    eligibility: "Students from any stream, any college.",
+    applyType: "internal", logo: "NA"
+  },
+  {
+    id: "j20", title: "Investment Banking Analyst", company: "Suvidha Capital",
+    city: "Mumbai", categories: ["Finance", "Graduate", "Full-time"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 1200000, salaryMax: 2000000, salaryUnit: "year",
+    expMin: 1, expMax: 3, education: "Postgraduate",
+    skills: ["Valuation", "Excel Modelling", "Pitch Decks"],
+    posted: daysAgo(8), deadline: daysFromNow(5),
+    description: "Support deal teams on M&A and capital markets transactions across sectors.",
+    eligibility: "MBA/CA/CFA candidates, open nationwide.",
+    applyType: "external", applyUrl: "https://www.naukri.com/", logo: "SC"
+  },
+  {
+    id: "j21", title: "Technical Support Executive", company: "HelpDesk360",
+    city: "Kochi", categories: ["Customer Support", "IT/Software", "Fresher"],
+    jobType: "Full-time", workMode: "Hybrid", salaryMin: 280000, salaryMax: 380000, salaryUnit: "year",
+    expMin: 0, expMax: 2, education: "Undergraduate",
+    skills: ["Troubleshooting", "Networking Basics", "Communication"],
+    posted: daysAgo(5), deadline: daysFromNow(19),
+    description: "Resolve tier-1/2 technical issues for SaaS customers via chat, email and calls.",
+    eligibility: "Any graduate, any city — training provided.",
+    applyType: "internal", logo: "HD"
+  },
+  {
+    id: "j22", title: "Data Analyst — Remote", company: "Vector Intelligence",
+    city: "Remote / Anywhere", categories: ["Data Science", "Analytics", "Remote", "Fresher"],
+    jobType: "Full-time", workMode: "Remote", salaryMin: 500000, salaryMax: 750000, salaryUnit: "year",
+    expMin: 0, expMax: 2, education: "Undergraduate",
+    skills: ["SQL", "Python", "Tableau", "Data Cleaning"],
+    posted: daysAgo(1), deadline: daysFromNow(26),
+    description: "Turn raw product data into dashboards and insights used by cross-functional teams.",
+    eligibility: "Fully remote — apply from anywhere in the country.",
+    applyType: "internal", logo: "VI"
+  },
+  {
+    id: "j23", title: "Railway Recruitment — Junior Clerk", company: "Govt. of India — Railways",
+    city: "Chennai", categories: ["Government Jobs", "12th Pass".replace("12th Pass","Undergraduate"), "Fresher"],
+    jobType: "Full-time", workMode: "On-site", salaryMin: 250000, salaryMax: 350000, salaryUnit: "year",
+    expMin: 0, expMax: 0, education: "12th Pass",
+    skills: ["General Knowledge", "Basic Computers", "Reasoning"],
+    posted: daysAgo(15), deadline: daysFromNow(45),
+    description: "Clerical and administrative recruitment across Indian Railways zonal offices.",
+    eligibility: "12th pass, Indian citizen, apply from anywhere.",
+    applyType: "external", applyUrl: "https://www.rrbcdg.gov.in/", logo: "GR"
+  },
+  {
+    id: "j24", title: "Product Design Intern", company: "Zenwave Technologies",
+    city: "Hyderabad", categories: ["Internships", "Design", "Undergraduate"],
+    jobType: "Internship", workMode: "Remote", salaryMin: 12000, salaryMax: 18000, salaryUnit: "month",
+    expMin: 0, expMax: 0, education: "Undergraduate",
+    skills: ["Figma", "Prototyping", "Design Systems"],
+    posted: daysAgo(2), deadline: daysFromNow(17),
+    description: "Help evolve our design system and prototype new product flows with the design team.",
+    eligibility: "Remote — open to students anywhere in India.",
+    applyType: "internal", logo: "ZW"
+  }
+];
+
+// attach lat/lng to jobs from city list for distance calc
+JOBS.forEach(j => {
+  const c = CITIES.find(c => c.name === j.city);
+  j.lat = c ? c.lat : null;
+  j.lng = c ? c.lng : null;
+});
+
+</script>
+<script>
+/* ============================================================
+   Job in One Click — App Logic
+   Vanilla JS SPA. All data is in-memory (demo only, resets on
+   page reload since this build has no backend/database).
+   ============================================================ */
+
+const state = {
+  user: null,            // {name, email, password} demo only
+  profile: null,         // profile/resume object
+  users: [],             // in-memory "database" of registered users
+  savedJobIds: new Set(),
+  applications: [],      // {jobId, status, appliedDate}
+  userLocation: null,    // {lat, lng, label}
+  darkMode: false,
+  filters: defaultFilters(),
+  route: "#/home",
+  toastTimer: null
+};
+
+function defaultFilters() {
+  return {
+    keyword: "", city: "", radiusKm: 2000, salaryMin: 0, salaryMax: 3000000,
+    education: "Any", expMax: 15, jobTypes: [], workModes: [], categories: [], company: "",
+    sort: "relevance"
+  };
+}
+
+/* ---------------- Utilities ---------------- */
+function haversine(lat1, lng1, lat2, lng2) {
+  if ([lat1, lng1, lat2, lng2].some(v => v === null || v === undefined)) return null;
+  const R = 6371, toRad = d => d * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1);
+  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLng/2)**2;
+  return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+}
+function fmtSalary(min, max, unit) {
+  const f = n => n >= 100000 ? (n/100000).toFixed(n % 100000 === 0 ? 0 : 1) + "L" : (n/1000) + "k";
+  if (unit === "year") return `₹${f(min)} - ₹${f(max)} / yr`;
+  return `₹${(min/1000)}k - ₹${(max/1000)}k / mo`;
+}
+function fmtDate(iso) {
+  return new Date(iso + "T00:00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+}
+function daysUntil(iso) {
+  const d1 = new Date(iso + "T00:00:00"), d0 = new Date();
+  d0.setHours(0,0,0,0);
+  return Math.round((d1 - d0) / 86400000);
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function el(id) { return document.getElementById(id); }
+function qs(sel, root) { return (root||document).querySelector(sel); }
+function qsa(sel, root) { return Array.from((root||document).querySelectorAll(sel)); }
+
+/* ---------------- Toast ---------------- */
+function toast(msg, icon) {
+  const wrap = el("toastWrap");
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.innerHTML = `<span>${icon || "✓"}</span><span>${escapeHtml(msg)}</span>`;
+  wrap.appendChild(t);
+  setTimeout(() => t.remove(), 3600);
+}
+
+/* ---------------- Matching algorithm ---------------- */
+function matchScore(job, profile) {
+  if (!profile) return null;
+  let score = 0, total = 0;
+  // skills overlap (weight 45)
+  total += 45;
+  const pSkills = (profile.skills || []).map(s => s.toLowerCase());
+  const jSkills = (job.skills || []).map(s => s.toLowerCase());
+  if (jSkills.length) {
+    const overlap = jSkills.filter(s => pSkills.includes(s)).length;
+    score += 45 * (overlap / jSkills.length);
+  } else { score += 30; }
+  // category / interest overlap (weight 20)
+  total += 20;
+  const pCats = (profile.preferredCategories || []);
+  const catOverlap = job.categories.filter(c => pCats.includes(c)).length;
+  score += 20 * Math.min(1, catOverlap / 1);
+  // experience fit (weight 20)
+  total += 20;
+  const exp = Number(profile.experienceYears || 0);
+  if (exp >= job.expMin && exp <= job.expMax + 2) score += 20;
+  else if (Math.abs(exp - job.expMin) <= 2) score += 10;
+  // education fit (weight 15)
+  total += 15;
+  const eduOrder = ["12th Pass","Diploma","Undergraduate","Postgraduate","Doctorate"];
+  const pIdx = eduOrder.indexOf(profile.education);
+  const jIdx = eduOrder.indexOf(job.education);
+  if (job.education === "Any" || pIdx === jIdx) score += 15;
+  else if (pIdx > jIdx) score += 12;
+  else if (pIdx >= 0 && jIdx >= 0 && Math.abs(pIdx - jIdx) === 1) score += 6;
+  return Math.round(Math.min(100, (score / total) * 100));
+}
+
+/* ---------------- Distance for a job ---------------- */
+function jobDistance(job) {
+  if (!state.userLocation || state.userLocation.lat === null) return null;
+  return haversine(state.userLocation.lat, state.userLocation.lng, job.lat, job.lng);
+}
+
+/* ---------------- Filtering / sorting ---------------- */
+function getFilteredJobs() {
+  const f = state.filters;
+  let list = JOBS.filter(j => {
+    if (f.keyword) {
+      const hay = (j.title + " " + j.company + " " + j.skills.join(" ")).toLowerCase();
+      if (!hay.includes(f.keyword.toLowerCase())) return false;
+    }
+    if (f.company && !j.company.toLowerCase().includes(f.company.toLowerCase())) return false;
+    if (f.education !== "Any" && j.education !== "Any" && j.education !== f.education) return false;
+    if (j.expMin > f.expMax) return false;
+    if (j.salaryMax < f.salaryMin || j.salaryMin > f.salaryMax) return false;
+    if (f.jobTypes.length && !f.jobTypes.includes(j.jobType)) return false;
+    if (f.workModes.length && !f.workModes.includes(j.workMode)) return false;
+    if (f.categories.length && !f.categories.some(c => j.categories.includes(c))) return false;
+    const dist = jobDistance(j);
+    if (state.userLocation && state.userLocation.lat !== null && dist !== null && dist > f.radiusKm) return false;
+    return true;
+  });
+  list = list.map(j => ({ job: j, dist: jobDistance(j), match: matchScore(j, state.profile) }));
+  switch (f.sort) {
+    case "distance": list.sort((a,b) => (a.dist ?? 1e9) - (b.dist ?? 1e9)); break;
+    case "salary": list.sort((a,b) => b.job.salaryMax - a.job.salaryMax); break;
+    case "date": list.sort((a,b) => new Date(b.job.posted) - new Date(a.job.posted)); break;
+    default: list.sort((a,b) => (b.match ?? 0) - (a.match ?? 0));
+  }
+  return list;
+}
+
+/* ---------------- Templates ---------------- */
+function matchClass(m) {
+  if (m === null) return "match-low";
+  if (m >= 70) return "match-high";
+  if (m >= 45) return "match-mid";
+  return "match-low";
+}
+function jobCardHtml({job, dist, match}) {
+  const saved = state.savedJobIds.has(job.id);
+  const dLeft = daysUntil(job.deadline);
+  return `
+  <article class="job-card" data-job="${job.id}">
+    <div class="job-card-top">
+      <div class="job-logo">${job.logo}</div>
+      <div class="job-title-wrap">
+        <h3><a href="#/job/${job.id}">${escapeHtml(job.title)}</a></h3>
+        <div class="company">${escapeHtml(job.company)} · ${escapeHtml(job.city)}</div>
+      </div>
+      ${match !== null ? `<span class="match-badge ${matchClass(match)}">${match}% match</span>` : ""}
+    </div>
+    <div class="meta-row">
+      <span class="meta-item">💰 ${fmtSalary(job.salaryMin, job.salaryMax, job.salaryUnit)}</span>
+      <span class="meta-item">🎓 ${escapeHtml(job.education)}</span>
+      <span class="meta-item">🧭 ${job.expMin}-${job.expMax === 0 ? 0 : job.expMax}+ yrs</span>
+      ${dist !== null ? `<span class="meta-item">📍 ${dist} km away</span>` : `<span class="meta-item">📍 ${escapeHtml(job.city)}</span>`}
+      <span class="meta-item">🗓 Posted ${fmtDate(job.posted)}</span>
+    </div>
+    <div class="tag-row">
+      <span class="tag blue">${escapeHtml(job.jobType)}</span>
+      <span class="tag blue">${escapeHtml(job.workMode)}</span>
+      ${job.categories.slice(0,3).map(c => `<span class="tag">${escapeHtml(c)}</span>`).join("")}
+    </div>
+    <div class="job-card-footer">
+      <span class="deadline-note">${dLeft >= 0 ? `Apply within ${dLeft} day${dLeft===1?"":"s"}` : "Deadline passed"}</span>
+      <div class="card-actions">
+        <button class="icon-btn ${saved ? "active" : ""}" title="Save job" data-action="save" data-id="${job.id}" aria-pressed="${saved}">${saved ? "★" : "☆"}</button>
+        <a class="btn btn-outline btn-sm" href="#/job/${job.id}">Details</a>
+        <button class="btn btn-primary btn-sm" data-action="apply" data-id="${job.id}">Apply Now</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+/* ---------------- Header / Nav ---------------- */
+const NAV_LINKS = [
+  { href: "#/dashboard", label: "Dashboard", icon: "🏠", auth: true },
+  { href: "#/jobs", label: "Jobs", icon: "🔎", auth: false },
+  { href: "#/saved", label: "Saved", icon: "★", auth: true },
+  { href: "#/applications", label: "Applications", icon: "📄", auth: true },
+  { href: "#/profile", label: "Profile", icon: "👤", auth: true }
+];
+
+function renderHeader() {
+  const route = state.route;
+  const links = NAV_LINKS.filter(l => !l.auth || state.user);
+  el("mainNav").innerHTML = links.map(l =>
+    `<a href="${l.href}" class="${route.startsWith(l.href) ? "active" : ""}">${escapeHtml(l.label)}</a>`
+  ).join("");
+  el("mobileNav").innerHTML = links.concat(state.user ? [] : [{href:"#/login", label:"Login", icon:"🔑"}]).map(l =>
+    `<a href="${l.href}" class="${route.startsWith(l.href) ? "active" : ""}"><span aria-hidden="true">${l.icon}</span>${escapeHtml(l.label)}</a>`
+  ).join("");
+
+  const locChip = el("locationChip");
+  if (state.userLocation) {
+    locChip.classList.remove("hidden");
+    locChip.innerHTML = `<span aria-hidden="true">📍</span><span>${escapeHtml(state.userLocation.label)}</span>`;
+  } else {
+    locChip.classList.remove("hidden");
+    locChip.innerHTML = `<span aria-hidden="true">📍</span><span>Set location</span>`;
+  }
+
+  const authArea = el("headerAuthArea");
+  if (state.user) {
+    const initials = state.profile?.name ? state.profile.name.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase() : "U";
+    authArea.innerHTML = `<a href="#/settings" class="avatar" title="Settings">${initials}</a>`;
+  } else {
+    authArea.innerHTML = `<a href="#/login" class="btn btn-outline btn-sm">Log in</a><a href="#/register" class="btn btn-primary btn-sm">Get started</a>`;
+  }
+}
+
+/* ---------------- Pages ---------------- */
+function pageHome() {
+  return `
+  <section class="hero">
+    <div class="container">
+      <div>
+        <div class="hero-eyebrow">JOB IN ONE CLICK</div>
+        <h1>Find the right job. Near you. Apply in one click.</h1>
+        <p class="lead">Build your profile once. We match you to internships, fresher roles, and experienced openings near your location — and apply instantly with your saved resume.</p>
+        <div class="hero-cta">
+          <a href="#/register" class="btn btn-primary">Create your free profile</a>
+          <a href="#/jobs" class="btn btn-outline">Browse jobs</a>
+        </div>
+        <div class="hero-search">
+          <div class="row">
+            <input class="input" id="heroKeyword" placeholder="Job title, company or skill" aria-label="Keyword search">
+            <select class="input" id="heroCity" aria-label="City">
+              <option value="">Use my location</option>
+              ${CITIES.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join("")}
+            </select>
+            <button class="btn btn-primary" id="heroSearchBtn">Search jobs</button>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>${JOBS.length}+</b><span>Live sample openings</span></div>
+          <div class="hero-stat"><b>15</b><span>Job categories</span></div>
+          <div class="hero-stat"><b>1-click</b><span>Apply with saved resume</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock-card">
+          <div class="mock-row"><strong style="font-size:14px">Frontend Developer</strong><span class="match-pill">92% match</span></div>
+          <div class="muted small">Flipmart Commerce · Mumbai · 2.3 km away</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-row"><strong style="font-size:14px">Data Scientist II</strong><span class="match-pill">85% match</span></div>
+          <div class="muted small">Vector Intelligence · Remote</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-row"><strong style="font-size:14px">SEO &amp; Content Intern</strong><span class="match-pill">78% match</span></div>
+          <div class="muted small">InkWell Media · Remote / Anywhere</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page container">
+    <div class="section-head"><h2>Browse by category</h2></div>
+    <div class="category-chip-grid">
+      ${CATEGORIES.map(c => `<a class="category-chip" href="#/jobs?cat=${encodeURIComponent(c)}">${escapeHtml(c)}</a>`).join("")}
+    </div>
+
+    <div class="section-head mt-24"><h2>How it works</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">Step 1</div><h4>Create your profile</h4><p class="muted small">Add your education, skills and experience once, and upload your resume.</p></div>
+      <div class="step"><div class="n">Step 2</div><h4>Get matched nearby</h4><p class="muted small">Share your location or pick a city — see distance and a match % on every job.</p></div>
+      <div class="step"><div class="n">Step 3</div><h4>Filter what fits</h4><p class="muted small">Narrow by salary, experience, education, job type and category.</p></div>
+      <div class="step"><div class="n">Step 4</div><h4>Apply in one click</h4><p class="muted small">We submit supported applications instantly, or take you to the official portal for others.</p></div>
+    </div>
+
+    <div class="section-head mt-24"><h2>Eligibility</h2></div>
+    <div class="card card-pad">
+      <p class="muted" style="margin:0">Candidates can apply from anywhere — there's no location restriction on applying. Location and distance are shown to help you plan commutes and prioritise nearby opportunities, not to limit who can apply. Remote, government, and many full-time roles on this platform explicitly welcome applicants from any city or state.</p>
+    </div>
+  </section>`;
+}
+
+function pageLogin(mode) {
+  return `
+  <div class="auth-wrap">
+    <div class="auth-card card card-pad">
+      <div class="auth-tabs">
+        <button data-tab="login" class="${mode !== "register" ? "active" : ""}">Log in</button>
+        <button data-tab="register" class="${mode === "register" ? "active" : ""}">Register</button>
+      </div>
+      <div id="authFormArea"></div>
+      <div class="mt-16 text-center">
+        <button class="btn btn-outline btn-block" id="guestBtn">Continue with demo profile</button>
+      </div>
+      <p class="small muted text-center mt-16" style="margin-bottom:0">Demo authentication — accounts are stored only in this browser session.</p>
+    </div>
+  </div>`;
+}
+function authFormHtml(mode) {
+  if (mode === "register") {
+    return `
+    <form id="authForm" class="form-grid" novalidate>
+      <div class="field"><label for="regName">Full name</label><input class="input" id="regName" required></div>
+      <div class="field"><label for="regEmail">Email</label><input class="input" type="email" id="regEmail" required></div>
+      <div class="field"><label for="regPass">Password</label><input class="input" type="password" id="regPass" minlength="6" required></div>
+      <button class="btn btn-primary btn-block" type="submit">Create account</button>
+    </form>`;
+  }
+  return `
+    <form id="authForm" class="form-grid" novalidate>
+      <div class="field"><label for="loginEmail">Email</label><input class="input" type="email" id="loginEmail" required></div>
+      <div class="field"><label for="loginPass">Password</label><input class="input" type="password" id="loginPass" required></div>
+      <button class="btn btn-primary btn-block" type="submit">Log in</button>
+    </form>`;
+}
+
+function pageDashboard() {
+  const applied = state.applications.length;
+  const saved = state.savedJobIds.size;
+  const completion = profileCompleteness();
+  const recs = getFilteredJobs().filter(x => x.match !== null).sort((a,b)=>b.match-a.match).slice(0,4);
+  return `
+  <div class="page container">
+    <div class="section-head"><h2>Welcome back${state.profile?.name ? ", " + escapeHtml(state.profile.name.split(" ")[0]) : ""}</h2></div>
+    <div class="grid cols-3">
+      <div class="stat-card"><div class="num">${applied}</div><div class="lbl">Applications sent</div></div>
+      <div class="stat-card"><div class="num">${saved}</div><div class="lbl">Saved jobs</div></div>
+      <div class="stat-card"><div class="num">${completion}%</div><div class="lbl">Profile completeness</div></div>
+    </div>
+
+    ${completion < 100 ? `
+    <div class="card card-pad mt-16">
+      <div class="flex justify-between items-center gap-12" style="flex-wrap:wrap">
+        <div>
+          <strong>Your profile is ${completion}% complete</strong>
+          <p class="muted small" style="margin:4px 0 0">Complete your profile and upload a resume to unlock accurate match % and one-click apply.</p>
+        </div>
+        <a href="#/profile" class="btn btn-primary btn-sm">Complete profile</a>
+      </div>
+    </div>` : ""}
+
+    <div class="section-head mt-24"><h2>Recommended for you</h2><a href="#/jobs" class="small">See all jobs →</a></div>
+    <div class="grid">
+      ${recs.length ? recs.map(jobCardHtml).join("") : `<div class="empty-state card"><div class="glyph">🧭</div>Complete your profile to see personalised matches.</div>`}
+    </div>
+  </div>`;
+}
+
+function profileCompleteness() {
+  const p = state.profile;
+  if (!p) return 0;
+  const fields = [p.name, p.email, p.phone, p.education, p.experienceYears !== undefined, (p.skills||[]).length, p.resumeName, (p.preferredCategories||[]).length];
+  const filled = fields.filter(Boolean).length;
+  return Math.round((filled / fields.length) * 100);
+}
+
+function pageJobs(queryStr) {
+  const params = new URLSearchParams(queryStr || "");
+  if (params.get("cat") && !state.filters.categories.includes(params.get("cat"))) {
+    state.filters.categories = [params.get("cat")];
+  }
+  const f = state.filters;
+  const results = getFilteredJobs();
+  return `
+  <div class="page container">
+    <div class="section-head"><h2>Jobs${f.categories.length ? " — " + escapeHtml(f.categories.join(", ")) : ""}</h2><span class="muted small">${results.length} results</span></div>
+    <div class="search-row">
+      <input class="input" id="kwInput" placeholder="Search title, company or skill" value="${escapeHtml(f.keyword)}">
+      <select class="input" id="cityInput" style="max-width:200px">
+        <option value="">${state.userLocation ? "My location" : "Select city"}</option>
+        ${CITIES.map(c => `<option value="${escapeHtml(c.name)}" ${f.city===c.name?"selected":""}>${escapeHtml(c.name)}</option>`).join("")}
+      </select>
+      <button class="btn btn-outline" id="useGpsBtn">📍 Use GPS</button>
+    </div>
+    <div class="jobs-layout">
+      <aside class="filters-panel" id="filtersPanel">
+        ${filtersHtml(f)}
+      </aside>
+      <div>
+        <div class="toolbar">
+          <span class="muted small">${state.userLocation ? "Sorted for " + escapeHtml(state.userLocation.label) : "Set your location for distance-based results"}</span>
+          <div class="toolbar-right">
+            <label class="small muted" for="sortSel">Sort:</label>
+            <select class="input" id="sortSel" style="width:auto">
+              <option value="relevance" ${f.sort==="relevance"?"selected":""}>Best match</option>
+              <option value="distance" ${f.sort==="distance"?"selected":""}>Nearest</option>
+              <option value="salary" ${f.sort==="salary"?"selected":""}>Highest salary</option>
+              <option value="date" ${f.sort==="date"?"selected":""}>Newest</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid" id="jobsList">
+          ${results.length ? results.map(jobCardHtml).join("") : `<div class="empty-state card"><div class="glyph">🔍</div>No jobs match your filters. Try widening your search radius or clearing filters.</div>`}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function filtersHtml(f) {
+  return `
+  <div class="filter-group">
+    <h4>Distance</h4>
+    <input type="range" id="radiusRange" min="5" max="2000" step="5" value="${f.radiusKm}" class="w-full">
+    <div class="range-row"><span>Within</span><span id="radiusVal">${f.radiusKm >= 2000 ? "Any distance" : f.radiusKm + " km"}</span></div>
+  </div>
+  <div class="filter-group">
+    <h4>Salary range (₹/yr equivalent)</h4>
+    <input type="range" id="salaryRange" min="0" max="3000000" step="50000" value="${f.salaryMax}" class="w-full">
+    <div class="range-row"><span>Up to</span><span id="salaryVal">₹${(f.salaryMax/100000).toFixed(1)}L</span></div>
+  </div>
+  <div class="filter-group">
+    <h4>Experience (max years)</h4>
+    <input type="range" id="expRange" min="0" max="15" step="1" value="${f.expMax}" class="w-full">
+    <div class="range-row"><span>Up to</span><span id="expVal">${f.expMax}+ yrs</span></div>
+  </div>
+  <div class="filter-group">
+    <h4>Education</h4>
+    <select class="input" id="eduSel">
+      ${EDUCATION_LEVELS.map(e => `<option value="${e}" ${f.education===e?"selected":""}>${e}</option>`).join("")}
+    </select>
+  </div>
+  <div class="filter-group">
+    <h4>Job type</h4>
+    ${JOB_TYPES.map(t => `<label class="filter-opt"><input type="checkbox" data-group="jobTypes" value="${t}" ${f.jobTypes.includes(t)?"checked":""}> ${t}</label>`).join("")}
+  </div>
+  <div class="filter-group">
+    <h4>Work mode</h4>
+    ${WORK_MODES.map(t => `<label class="filter-opt"><input type="checkbox" data-group="workModes" value="${t}" ${f.workModes.includes(t)?"checked":""}> ${t}</label>`).join("")}
+  </div>
+  <div class="filter-group">
+    <h4>Category</h4>
+    ${CATEGORIES.map(t => `<label class="filter-opt"><input type="checkbox" data-group="categories" value="${t}" ${f.categories.includes(t)?"checked":""}> ${t}</label>`).join("")}
+  </div>
+  <div class="filter-group">
+    <h4>Company</h4>
+    <input class="input" id="companyInput" placeholder="e.g. Zenwave" value="${escapeHtml(f.company)}">
+  </div>
+  <button class="btn btn-outline btn-block" id="clearFiltersBtn">Clear all filters</button>
+  `;
+}
+
+function pageJobDetails(id) {
+  const job = JOBS.find(j => j.id === id);
+  if (!job) return `<div class="page container"><div class="empty-state card">Job not found. <a href="#/jobs">Back to jobs</a></div></div>`;
+  const dist = jobDistance(job);
+  const match = matchScore(job, state.profile);
+  const saved = state.savedJobIds.has(job.id);
+  const dLeft = daysUntil(job.deadline);
+  const similar = JOBS.filter(j => j.id !== job.id && j.categories.some(c => job.categories.includes(c))).slice(0,3);
+  const breakdown = state.profile ? matchBreakdown(job, state.profile) : null;
+  return `
+  <div class="page container">
+    <a href="#/jobs" class="small muted">← Back to jobs</a>
+    <div class="detail-grid mt-16">
+      <div>
+        <div class="card card-pad">
+          <div class="detail-header">
+            <div class="job-logo">${job.logo}</div>
+            <div style="flex:1;min-width:200px">
+              <h2 style="margin-bottom:4px">${escapeHtml(job.title)}</h2>
+              <p class="muted" style="margin:0">${escapeHtml(job.company)} · ${escapeHtml(job.city)}${dist!==null?` · ${dist} km away`:""}</p>
+            </div>
+            ${match !== null ? `<span class="match-badge ${matchClass(match)}" style="font-size:14px;padding:6px 14px">${match}% match</span>` : ""}
+          </div>
+          <div class="tag-row mt-16">
+            <span class="tag blue">${escapeHtml(job.jobType)}</span>
+            <span class="tag blue">${escapeHtml(job.workMode)}</span>
+            ${job.categories.map(c=>`<span class="tag">${escapeHtml(c)}</span>`).join("")}
+          </div>
+          <div class="spec-grid">
+            <div class="spec-item"><div class="k">Salary</div><div class="v">${fmtSalary(job.salaryMin,job.salaryMax,job.salaryUnit)}</div></div>
+            <div class="spec-item"><div class="k">Experience</div><div class="v">${job.expMin}-${job.expMax} yrs</div></div>
+            <div class="spec-item"><div class="k">Education</div><div class="v">${escapeHtml(job.education)}</div></div>
+            <div class="spec-item"><div class="k">Posted</div><div class="v">${fmtDate(job.posted)}</div></div>
+            <div class="spec-item"><div class="k">Deadline</div><div class="v">${fmtDate(job.deadline)} ${dLeft>=0?`(${dLeft}d left)`:"(closed)"}</div></div>
+          </div>
+          <h4>Job description</h4>
+          <p class="muted">${escapeHtml(job.description)}</p>
+          <h4>Required skills</h4>
+          <div class="tag-row">${job.skills.map(s=>`<span class="tag">${escapeHtml(s)}</span>`).join("")}</div>
+          <h4 class="mt-16">Eligibility</h4>
+          <p class="muted" style="margin:0">${escapeHtml(job.eligibility)}</p>
+        </div>
+
+        ${similar.length ? `
+        <div class="section-head mt-24"><h2>Similar jobs</h2></div>
+        <div class="grid">${similar.map(j => jobCardHtml({job:j, dist: jobDistance(j), match: matchScore(j, state.profile)})).join("")}</div>` : ""}
+      </div>
+
+      <div>
+        <div class="card card-pad">
+          <button class="btn btn-primary btn-block" data-action="apply" data-id="${job.id}">Apply Now — ${job.applyType === "internal" ? "One-Click" : "Official Portal"}</button>
+          <button class="btn btn-outline btn-block mt-8" data-action="save" data-id="${job.id}">${saved ? "★ Saved" : "☆ Save job"}</button>
+          <p class="small muted mt-16" style="margin:0">
+            ${job.applyType === "internal"
+              ? "This employer accepts applications directly through Job in One Click using your saved profile and resume."
+              : "This employer's application is hosted on an external portal. We'll redirect you there and prefill details where the portal supports it — you'll complete and submit it on their site."}
+          </p>
+        </div>
+        ${breakdown ? `
+        <div class="card card-pad mt-16">
+          <h4 style="margin-bottom:12px">How your profile matches</h4>
+          ${breakdown.map(b => `
+            <div class="match-breakdown-row">
+              <span style="width:90px;flex-shrink:0">${b.label}</span>
+              <span class="bar-track"><span class="bar-fill" style="width:${b.pct}%"></span></span>
+              <span style="width:34px;text-align:right;flex-shrink:0">${b.pct}%</span>
+            </div>`).join("")}
+        </div>` : `
+        <div class="card card-pad mt-16">
+          <p class="small muted" style="margin:0">Complete your <a href="#/profile">profile</a> to see a personalised match breakdown.</p>
+        </div>`}
+      </div>
+    </div>
+  </div>`;
+}
+function matchBreakdown(job, profile) {
+  const pSkills = (profile.skills||[]).map(s=>s.toLowerCase());
+  const jSkills = (job.skills||[]).map(s=>s.toLowerCase());
+  const skillPct = jSkills.length ? Math.round(100 * jSkills.filter(s=>pSkills.includes(s)).length / jSkills.length) : 60;
+  const catPct = job.categories.some(c => (profile.preferredCategories||[]).includes(c)) ? 100 : 20;
+  const exp = Number(profile.experienceYears||0);
+  const expPct = (exp >= job.expMin && exp <= job.expMax+2) ? 100 : (Math.abs(exp-job.expMin)<=2 ? 55 : 15);
+  const eduOrder = ["12th Pass","Diploma","Undergraduate","Postgraduate","Doctorate"];
+  const pIdx = eduOrder.indexOf(profile.education), jIdx = eduOrder.indexOf(job.education);
+  const eduPct = (job.education==="Any"||pIdx===jIdx) ? 100 : (pIdx>jIdx ? 80 : 30);
+  return [
+    {label:"Skills", pct: skillPct}, {label:"Category", pct: catPct},
+    {label:"Experience", pct: expPct}, {label:"Education", pct: eduPct}
+  ];
+}
+
+function pageSaved() {
+  const list = JOBS.filter(j => state.savedJobIds.has(j.id)).map(j => ({job:j, dist: jobDistance(j), match: matchScore(j, state.profile)}));
+  return `
+  <div class="page container">
+    <div class="section-head"><h2>Saved jobs</h2></div>
+    <div class="grid">
+      ${list.length ? list.map(jobCardHtml).join("") : `<div class="empty-state card"><div class="glyph">☆</div>No saved jobs yet. Tap the star on any job to save it for later.<br><a href="#/jobs" class="btn btn-primary btn-sm mt-16" style="display:inline-flex">Browse jobs</a></div>`}
+    </div>
+  </div>`;
+}
+
+function pageApplications() {
+  const apps = state.applications.slice().sort((a,b)=> new Date(b.appliedDate)-new Date(a.appliedDate));
+  const statusClass = {
+    "Submitted":"status-submitted", "Redirected — complete on portal":"status-redirected",
+    "Under Review":"status-review", "Interview Scheduled":"status-interview",
+    "Rejected":"status-rejected", "Selected":"status-selected"
+  };
+  return `
+  <div class="page container">
+    <div class="section-head"><h2>Applications tracker</h2><span class="muted small">${apps.length} total</span></div>
+    <div class="app-list">
+      ${apps.length ? apps.map(a => {
+        const job = JOBS.find(j => j.id === a.jobId);
+        if (!job) return "";
+        return `
+        <div class="app-row">
+          <div>
+            <strong>${escapeHtml(job.title)}</strong>
+            <div class="muted small">${escapeHtml(job.company)} · ${escapeHtml(job.city)}</div>
+          </div>
+          <div class="small"><span class="muted">Applied</span><br>${fmtDate(a.appliedDate)}</div>
+          <div class="small"><span class="muted">Mode</span><br>${a.jobApplyType === "internal" ? "One-Click" : "External portal"}</div>
+          <div><span class="status-badge ${statusClass[a.status]||"status-review"}">${escapeHtml(a.status)}</span></div>
+          <a href="#/job/${job.id}" class="btn btn-outline btn-sm">View job</a>
+        </div>`;
+      }).join("") : `<div class="empty-state card"><div class="glyph">📄</div>You haven't applied to any jobs yet. Once you do, track their status here.</div>`}
+    </div>
+  </div>`;
+}
+
+function pageProfile() {
+  const p = state.profile || {};
+  const completion = profileCompleteness();
+  return `
+  <div class="page container">
+    <div class="section-head"><h2>Profile &amp; resume</h2></div>
+    <div class="card card-pad mt-8" style="margin-bottom:18px">
+      <div class="flex justify-between items-center gap-12" style="flex-wrap:wrap">
+        <strong>Profile completeness</strong><span class="muted small">${completion}%</span>
+      </div>
+      <div class="progress-track mt-8"><div class="progress-fill" style="width:${completion}%"></div></div>
+    </div>
+    <form id="profileForm" class="card card-pad">
+      <div class="form-grid two">
+        <div class="field"><label for="pName">Full name</label><input class="input" id="pName" value="${escapeHtml(p.name||"")}" required></div>
+        <div class="field"><label for="pEmail">Email</label><input class="input" type="email" id="pEmail" value="${escapeHtml(p.email||"")}" required></div>
+        <div class="field"><label for="pPhone">Phone</label><input class="input" id="pPhone" value="${escapeHtml(p.phone||"")}" placeholder="+91 9xxxxxxxxx"></div>
+        <div class="field"><label for="pEducation">Highest education</label>
+          <select class="input" id="pEducation">${EDUCATION_LEVELS.filter(e=>e!=="Any").map(e=>`<option ${p.education===e?"selected":""}>${e}</option>`).join("")}</select>
+        </div>
+        <div class="field"><label for="pExp">Years of experience</label><input class="input" type="number" min="0" max="40" id="pExp" value="${p.experienceYears ?? 0}"></div>
+        <div class="field"><label for="pCity">Home city</label>
+          <select class="input" id="pCity">${CITIES.map(c=>`<option ${p.city===c.name?"selected":""}>${c.name}</option>`).join("")}</select>
+        </div>
+      </div>
+      <div class="field mt-16">
+        <label for="skillInput">Skills</label>
+        <div class="tag-input" id="skillTagInput">
+          ${(p.skills||[]).map(s => `<span class="tag-remove">${escapeHtml(s)}<button type="button" data-remove-skill="${escapeHtml(s)}" aria-label="Remove ${escapeHtml(s)}">×</button></span>`).join("")}
+          <input id="skillInput" placeholder="Type a skill and press Enter">
+        </div>
+        <p class="hint">e.g. Python, React, Excel, Communication</p>
+      </div>
+      <div class="field mt-16">
+        <label>Preferred categories</label>
+        <div class="category-chip-grid">
+          ${CATEGORIES.map(c => `<label class="filter-opt"><input type="checkbox" data-pref-cat value="${c}" ${(p.preferredCategories||[]).includes(c)?"checked":""}> ${c}</label>`).join("")}
+        </div>
+      </div>
+      <div class="field mt-16">
+        <label>Resume</label>
+        <div class="upload-box ${p.resumeName ? "has-file" : ""}" id="uploadBox">
+          <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" class="sr-only">
+          <p style="margin:0 0 8px"><label for="resumeFile" class="btn btn-outline btn-sm" style="cursor:pointer">${p.resumeName ? "Replace resume" : "Upload resume (PDF/DOC)"}</label></p>
+          <p class="small" style="margin:0">${p.resumeName ? "📎 " + escapeHtml(p.resumeName) : "No file uploaded yet. This powers One-Click Apply."}</p>
+        </div>
+      </div>
+      <button class="btn btn-primary mt-24" type="submit">Save profile</button>
+    </form>
+  </div>`;
+}
+
+function pageSettings() {
+  return `
+  <div class="page container" style="max-width:640px">
+    <div class="section-head"><h2>Settings</h2></div>
+    <div class="card card-pad">
+      <div class="flex justify-between items-center">
+        <div><strong>Dark mode</strong><p class="muted small" style="margin:2px 0 0">Switch between light and dark themes.</p></div>
+        <button class="btn btn-outline btn-sm" id="toggleDarkBtn2">${state.darkMode ? "Switch to light" : "Switch to dark"}</button>
+      </div>
+    </div>
+    <div class="card card-pad mt-16">
+      <div class="flex justify-between items-center">
+        <div><strong>Location access</strong><p class="muted small" style="margin:2px 0 0">${state.userLocation ? "Using: " + escapeHtml(state.userLocation.label) : "Not set"}</p></div>
+        <button class="btn btn-outline btn-sm" id="reqGpsBtn">Update location</button>
+      </div>
+    </div>
+    <div class="card card-pad mt-16">
+      <div class="flex justify-between items-center">
+        <div><strong>Email notifications</strong><p class="muted small" style="margin:2px 0 0">New matching jobs and application updates.</p></div>
+        <label class="filter-opt"><input type="checkbox" checked> Enabled</label>
+      </div>
+    </div>
+    <div class="card card-pad mt-16">
+      <div class="flex justify-between items-center">
+        <div><strong>Account</strong><p class="muted small" style="margin:2px 0 0">${escapeHtml(state.user?.email || "")}</p></div>
+        <button class="btn btn-danger btn-sm" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------------- Router ---------------- */
+function requireAuth(next) {
+  if (!state.user) { location.hash = "#/login"; return false; }
+  return true;
+}
+function render() {
+  const [path, queryStr] = location.hash.replace(/^#/, "").split("?");
+  state.route = "#" + (path || "/home");
+  const main = el("app");
+  const segs = (path || "/home").split("/").filter(Boolean);
+
+  if (segs[0] === "job" && segs[1]) { main.innerHTML = pageJobDetails(segs[1]); }
+  else if (path === "/home" || !path) { main.innerHTML = pageHome(); }
+  else if (path === "/login") { main.innerHTML = pageLogin("login"); }
+  else if (path === "/register") { main.innerHTML = pageLogin("register"); }
+  else if (path === "/jobs") { main.innerHTML = pageJobs(queryStr); }
+  else if (path === "/dashboard") { if (requireAuth()) main.innerHTML = pageDashboard(); }
+  else if (path === "/saved") { if (requireAuth()) main.innerHTML = pageSaved(); }
+  else if (path === "/applications") { if (requireAuth()) main.innerHTML = pageApplications(); }
+  else if (path === "/profile") { if (requireAuth()) main.innerHTML = pageProfile(); }
+  else if (path === "/settings") { if (requireAuth()) main.innerHTML = pageSettings(); }
+  else { main.innerHTML = `<div class="page container"><div class="empty-state card">Page not found. <a href="#/home">Go home</a></div></div>`; }
+
+  renderHeader();
+  window.scrollTo(0,0);
+  bindPageEvents();
+}
+
+/* ---------------- Event binding (delegated + per-page) ---------------- */
+function bindGlobalActions() {
+  document.body.addEventListener("click", (e) => {
+    const saveBtn = e.target.closest("[data-action='save']");
+    if (saveBtn) {
+      if (!state.user) { location.hash = "#/login"; return; }
+      const id = saveBtn.dataset.id;
+      if (state.savedJobIds.has(id)) { state.savedJobIds.delete(id); toast("Removed from saved jobs", "☆"); }
+      else { state.savedJobIds.add(id); toast("Job saved", "★"); }
+      render();
+      return;
+    }
+    const applyBtn = e.target.closest("[data-action='apply']");
+    if (applyBtn) { handleApply(applyBtn.dataset.id); return; }
+  });
+
+  el("darkToggle").addEventListener("click", toggleDark);
+}
+
+function toggleDark() {
+  state.darkMode = !state.darkMode;
+  document.documentElement.classList.toggle("dark", state.darkMode);
+  el("darkToggle").textContent = state.darkMode ? "☀️" : "🌙";
+}
+
+function bindPageEvents() {
+  // Home hero search
+  const heroBtn = el("heroSearchBtn");
+  if (heroBtn) heroBtn.addEventListener("click", () => {
+    state.filters.keyword = el("heroKeyword").value;
+    const city = el("heroCity").value;
+    if (city) setCityLocation(city); 
+    location.hash = "#/jobs";
+  });
+
+  // Auth
+  const authArea = el("authFormArea");
+  if (authArea) {
+    let mode = state.route === "#/register" ? "register" : "login";
+    authArea.innerHTML = authFormHtml(mode);
+    qsa(".auth-tabs button").forEach(b => b.addEventListener("click", () => {
+      mode = b.dataset.tab; location.hash = mode === "register" ? "#/register" : "#/login";
+    }));
+    el("authForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (mode === "register") {
+        const name = el("regName").value.trim(), email = el("regEmail").value.trim(), pass = el("regPass").value;
+        if (!name || !email || pass.length < 6) { toast("Please fill all fields (password 6+ chars)", "⚠️"); return; }
+        if (state.users.find(u => u.email === email)) { toast("An account with this email already exists", "⚠️"); return; }
+        state.users.push({ name, email, password: pass });
+        state.user = { name, email };
+        state.profile = { name, email, skills: [], preferredCategories: [], experienceYears: 0, education: "Undergraduate" };
+        toast("Account created — welcome!", "🎉");
+        location.hash = "#/profile";
+      } else {
+        const email = el("loginEmail").value.trim(), pass = el("loginPass").value;
+        const u = state.users.find(u => u.email === email && u.password === pass);
+        if (!u) { toast("Invalid credentials. Try the demo profile instead.", "⚠️"); return; }
+        state.user = { name: u.name, email: u.email };
+        if (!state.profile) state.profile = { name: u.name, email: u.email, skills: [], preferredCategories: [], experienceYears: 0, education: "Undergraduate" };
+        toast("Welcome back, " + u.name.split(" ")[0] + "!", "👋");
+        location.hash = "#/dashboard";
+      }
+    });
+  }
+  const guestBtn = el("guestBtn");
+  if (guestBtn) guestBtn.addEventListener("click", () => {
+    state.user = { name: "Demo Candidate", email: "demo@jobinoneclick.app" };
+    state.profile = {
+      name: "Demo Candidate", email: "demo@jobinoneclick.app", phone: "+91 90000 00000",
+      education: "Undergraduate", experienceYears: 1, city: "Hyderabad",
+      skills: ["React", "JavaScript", "SQL", "Communication"],
+      preferredCategories: ["IT/Software", "Fresher", "Internships"],
+      resumeName: "demo_candidate_resume.pdf"
+    };
+    setCityLocation("Hyderabad");
+    toast("Demo profile loaded", "🎉");
+    location.hash = "#/dashboard";
+  });
+
+  // Jobs page filters
+  const kw = el("kwInput");
+  if (kw) {
+    kw.addEventListener("input", debounce(() => { state.filters.keyword = kw.value; refreshJobsList(); }, 250));
+    el("cityInput").addEventListener("change", (e) => { if (e.target.value) setCityLocation(e.target.value); refreshJobsList(); });
+    el("useGpsBtn").addEventListener("click", requestGps);
+    el("sortSel").addEventListener("change", (e) => { state.filters.sort = e.target.value; refreshJobsList(); });
+    el("radiusRange").addEventListener("input", (e) => {
+      state.filters.radiusKm = Number(e.target.value);
+      el("radiusVal").textContent = state.filters.radiusKm >= 2000 ? "Any distance" : state.filters.radiusKm + " km";
+      refreshJobsList();
+    });
+    el("salaryRange").addEventListener("input", (e) => {
+      state.filters.salaryMax = Number(e.target.value);
+      el("salaryVal").textContent = "₹" + (state.filters.salaryMax/100000).toFixed(1) + "L";
+      refreshJobsList();
+    });
+    el("expRange").addEventListener("input", (e) => {
+      state.filters.expMax = Number(e.target.value);
+      el("expVal").textContent = state.filters.expMax + "+ yrs";
+      refreshJobsList();
+    });
+    el("eduSel").addEventListener("change", (e) => { state.filters.education = e.target.value; refreshJobsList(); });
+    el("companyInput").addEventListener("input", debounce((e) => { state.filters.company = e.target.value; refreshJobsList(); }, 250));
+    qsa("[data-group]").forEach(cb => cb.addEventListener("change", () => {
+      const group = cb.dataset.group;
+      const val = cb.value;
+      const arr = state.filters[group];
+      if (cb.checked) { if (!arr.includes(val)) arr.push(val); }
+      else { state.filters[group] = arr.filter(v => v !== val); }
+      refreshJobsList();
+    }));
+    el("clearFiltersBtn").addEventListener("click", () => {
+      const kwVal = state.filters.keyword;
+      state.filters = defaultFilters(); state.filters.keyword = kwVal;
+      render();
+    });
+  }
+
+  // Profile form
+  const pf = el("profileForm");
+  if (pf) {
+    pf.addEventListener("submit", (e) => {
+      e.preventDefault();
+      state.profile = {
+        ...state.profile,
+        name: el("pName").value.trim(), email: el("pEmail").value.trim(), phone: el("pPhone").value.trim(),
+        education: el("pEducation").value, experienceYears: Number(el("pExp").value || 0), city: el("pCity").value,
+      };
+      toast("Profile saved", "✅");
+      render();
+    });
+    let skills = [...(state.profile?.skills || [])];
+    const skillInput = el("skillInput");
+    skillInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && skillInput.value.trim()) {
+        e.preventDefault();
+        skills.push(skillInput.value.trim());
+        state.profile.skills = skills;
+        render();
+      }
+    });
+    qsa("[data-remove-skill]").forEach(b => b.addEventListener("click", () => {
+      state.profile.skills = (state.profile.skills || []).filter(s => s !== b.dataset.removeSkill);
+      render();
+    }));
+    qsa("[data-pref-cat]").forEach(cb => cb.addEventListener("change", () => {
+      let cats = new Set(state.profile.preferredCategories || []);
+      cb.checked ? cats.add(cb.value) : cats.delete(cb.value);
+      state.profile.preferredCategories = Array.from(cats);
+    }));
+    el("resumeFile").addEventListener("change", (e) => {
+      const f = e.target.files[0];
+      if (f) { state.profile.resumeName = f.name; toast("Resume attached: " + f.name, "📎"); render(); }
+    });
+  }
+
+  // Settings
+  const dk2 = el("toggleDarkBtn2");
+  if (dk2) dk2.addEventListener("click", () => { toggleDark(); render(); });
+  const gpsBtn = el("reqGpsBtn");
+  if (gpsBtn) gpsBtn.addEventListener("click", requestGps);
+  const logoutBtn = el("logoutBtn");
+  if (logoutBtn) logoutBtn.addEventListener("click", () => {
+    state.user = null; toast("Logged out", "👋"); location.hash = "#/home";
+  });
+}
+
+function refreshJobsList() {
+  const list = el("jobsList");
+  if (!list) return;
+  const results = getFilteredJobs();
+  list.innerHTML = results.length ? results.map(jobCardHtml).join("") : `<div class="empty-state card"><div class="glyph">🔍</div>No jobs match your filters. Try widening your search radius or clearing filters.</div>`;
+  const head = qs(".section-head span");
+  if (head) head.textContent = results.length + " results";
+}
+
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+/* ---------------- Location ---------------- */
+function setCityLocation(name) {
+  const c = CITIES.find(c => c.name === name);
+  if (!c) return;
+  state.userLocation = { lat: c.lat, lng: c.lng, label: c.name };
+  renderHeader();
+}
+function requestGps() {
+  if (!navigator.geolocation) { toast("Geolocation isn't supported on this device. Please pick a city instead.", "⚠️"); return; }
+  toast("Requesting your location…", "📍");
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      state.userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude, label: "Current location" };
+      toast("Location found — showing jobs near you", "✅");
+      render();
+    },
+    (err) => {
+      toast("Location permission denied. Select a city manually instead.", "⚠️");
+    },
+    { enableHighAccuracy: false, timeout: 8000 }
+  );
+}
+
+/* ---------------- Apply flow ---------------- */
+function handleApply(jobId) {
+  const job = JOBS.find(j => j.id === jobId);
+  if (!job) return;
+  if (!state.user) { toast("Please log in to apply", "🔒"); location.hash = "#/login"; return; }
+  const already = state.applications.find(a => a.jobId === jobId);
+  if (already) { toast("You've already applied to this job", "ℹ️"); return; }
+  const completion = profileCompleteness();
+  if (!state.profile?.resumeName || completion < 60) {
+    showModal(`
+      <h3>Complete your profile first</h3>
+      <p class="muted">One-Click Apply uses your saved profile and resume. Please add your details and upload a resume before applying.</p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" data-close-modal>Cancel</button>
+        <a href="#/profile" class="btn btn-primary" data-close-modal>Go to profile</a>
+      </div>`);
+    return;
+  }
+  if (job.applyType === "internal") {
+    state.applications.push({ jobId, status: "Submitted", appliedDate: new Date().toISOString().slice(0,10), jobApplyType: "internal" });
+    toast("Application submitted using your saved profile ✅", "✅");
+    render();
+  } else {
+    showModal(`
+      <h3>You'll apply on ${escapeHtml(job.company)}'s official portal</h3>
+      <p class="muted">Job in One Click doesn't submit this application for you. We'll open the official portal in a new tab and prefill your details where the portal supports it — you'll need to review and submit it there.</p>
+      <div class="modal-actions">
+        <button class="btn btn-outline" data-close-modal>Cancel</button>
+        <button class="btn btn-primary" id="confirmExternalApply">Continue to portal</button>
+      </div>`);
+    el("confirmExternalApply").addEventListener("click", () => {
+      const url = new URL(job.applyUrl);
+      try {
+        if (state.profile?.name) url.searchParams.set("name", state.profile.name);
+        if (state.profile?.email) url.searchParams.set("email", state.profile.email);
+      } catch(e) {}
+      window.open(url.toString(), "_blank", "noopener");
+      state.applications.push({ jobId, status: "Redirected — complete on portal", appliedDate: new Date().toISOString().slice(0,10), jobApplyType: "external" });
+      closeModal();
+      toast("Redirected to official portal — finish your application there", "↗️");
+      render();
+    });
+  }
+}
+
+function showModal(innerHtml) {
+  const overlay = document.createElement("div");
+  overlay.className = "modal-overlay";
+  overlay.innerHTML = `<div class="modal-box">${innerHtml}</div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+  qsa("[data-close-modal]", overlay).forEach(b => b.addEventListener("click", closeModal));
+}
+function closeModal() { const o = qs(".modal-overlay"); if (o) o.remove(); }
+
+/* ---------------- Init ---------------- */
+window.addEventListener("hashchange", render);
+window.addEventListener("DOMContentLoaded", () => {
+  bindGlobalActions();
+  if (!location.hash) location.hash = "#/home";
+  render();
+});
+
+</script>
+</body>
+</html>
