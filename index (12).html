@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job in One Click — Find the right job. Near you. Apply in one click.</title>
+<meta name="description" content="A modern job-search platform for students, freshers and professionals. Build your profile once, discover jobs near you, and apply in one click.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <div class="container">
+    <a href="#/home" class="brand"><span class="brand-mark">JC</span> Job in One Click</a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary"></nav>
+    <div class="header-spacer"></div>
+    <div class="header-actions">
+      <span class="location-chip" id="locationChip"></span>
+      <button class="icon-btn" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+      <span id="headerAuthArea" class="flex gap-8 items-center"></span>
+    </div>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile"></nav>
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<footer class="site-footer">
+  <div>© 2026 Job in One Click — demo project with illustrative sample data.</div>
+  <div class="mt-8">Made with <span class="heart">❤️</span> by <span class="credit">Pullayyagari Vinayaka</span></div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
